@@ -1,9 +1,9 @@
 import matplotlib.pyplot as plt
 
-#cpahax49ry2t7r892  trt
-def search_for_a_visitor(plase):
+def search_for_a_visitor(plase): #count
     temp_plase = []
     temp_chet = 0
+    #horizontal
     for i in range(len(plase)):
         if i % 3 == 0:
             temp_plase.append([])
@@ -37,54 +37,58 @@ def search_for_a_visitor(plase):
         return False
     temp_chet = 0
 
-    if (temp_plase[0][0] == 'x' and temp_plase[1][1] == 'x' and temp_plase[2][2] == 'x') \
-            or (temp_plase[0][2] == 'x' and temp_plase[1][1] == 'x' and temp_plase[2][0] == 'x'):
-        return True
-    if (temp_plase[0][0] == '0' and temp_plase[1][1] == '0' and temp_plase[2][2] == '0') \
-            or (temp_plase[0][2] == '0' and temp_plase[1][1] == '0' and temp_plase[2][0] == '0'):
-        return False
+    for i in range(3):
+        if temp_plase[0][i] == '0' and temp_plase[1][i] == '0' and temp_plase[2][i] == '0':
+            return True
+        if temp_plase[0][i] == '0' and temp_plase[1][i] == '0' and temp_plase[2][i] == '0':
+            return False
+
 
     return None
 
-def finding_x_0(place, number_of_values, vals,i = None, cross_turn = False,):
+def finding_x_0(place, number_of_values, vals,i = None, cross_turn = False,): #main
     if i != None:
         place[i] = '0'
         if cross_turn:
             place[i] = 'x'
 
+        result = search_for_a_visitor(place)
+        # if result == False:
+        #     print(result)
+        #     for i in range(len(place)):
+        #         print(place[i], end=' ')
+        #         if (i + 1) % 3 == 0:
+        #             print()
+        #     print('\n________________\n')
+
+        if result == None:
+            vals[2] += 1
+
+        if result:
+            vals[0] += 1
+        else:
+            vals[1] += 1
 
         if len(number_of_values) == 0:
-            result = search_for_a_visitor(place)
-            if result == None:
-                return 2
-
-            if result:
-                return 0
-            else:
-                return 1
-
-
+            return vals
 
 
     for i in number_of_values:
         temp = number_of_values.copy()
         temp.remove(i)
-        vals[finding_x_0(place.copy(), temp, vals,i, not cross_turn)] += 1
+        vals = finding_x_0(place.copy(), temp, vals,i, not cross_turn)
 
     return vals
 
 
+
 place = [None, None, None, None, None, None, None, None, None]
 posible_turns = [0, 1, 2, 3, 4, 5, 6, 7, 8]
-
-
-
-
 vals = [0, 0, 0]
 labels = ['x', '0', 'None']
 
-vals = finding_x_0(place, posible_turns, vals)
+vals = finding_x_0(place, posible_turns, vals) #start
 
-plt.pie(vals, labels=labels,  autopct='%1.1f%%')
+plt.pie(vals, labels=labels,  autopct='%1.1f%%') #paint
 plt.title('проценты побед в крестиках и ноликах')
 plt.show()
