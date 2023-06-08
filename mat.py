@@ -1,18 +1,9 @@
 import matplotlib.pyplot as plt
-import numpy as np
 
-plt.style.use('_mpl-gallery')
 
-# make data
-x = np.linspace(0, 10, 100)
-y = 4 + 2 * np.sin(2 * x)
+vals = [20000, 15000, 40000]
+labels = ['x', '0', 'None']
 
-# plot
-fig, ax = plt.subplots()
-
-ax.plot(x, y, linewidth=2.0)
-
-ax.set(xlim=(0, 8), xticks=np.arange(1, 8),
-       ylim=(0, 8), yticks=np.arange(1, 8))
-
+plt.pie(vals, labels=labels,  autopct='%1.1f%%')
+plt.title('проценты побед в крестиках и ноликах')
 plt.show()
