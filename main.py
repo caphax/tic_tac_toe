@@ -38,7 +38,7 @@ def search_for_a_visitor(plase): #count
     temp_chet = 0
 
     for i in range(3):
-        if temp_plase[0][i] == '0' and temp_plase[1][i] == '0' and temp_plase[2][i] == '0':
+        if temp_plase[0][i] == 'x' and temp_plase[1][i] == 'x' and temp_plase[2][i] == 'x':
             return True
         if temp_plase[0][i] == '0' and temp_plase[1][i] == '0' and temp_plase[2][i] == '0':
             return False
@@ -47,6 +47,8 @@ def search_for_a_visitor(plase): #count
     return None
 
 def finding_x_0(place, number_of_values, vals,i = None, cross_turn = False,): #main
+    global games_count
+    games_count += 1
     if i != None:
         place[i] = '0'
         if cross_turn:
@@ -86,9 +88,10 @@ place = [None, None, None, None, None, None, None, None, None]
 posible_turns = [0, 1, 2, 3, 4, 5, 6, 7, 8]
 vals = [0, 0, 0]
 labels = ['x', '0', 'None']
-
+games_count = 0
 vals = finding_x_0(place, posible_turns, vals) #start
-
+print(vals)
+print(sum(vals))
 plt.pie(vals, labels=labels,  autopct='%1.1f%%') #paint
 plt.title('проценты побед в крестиках и ноликах')
 plt.show()

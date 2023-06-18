@@ -1,9 +1,9 @@
 import matplotlib.pyplot as plt
 
+x = [1,2,3]
+y = [1,2,3]
 
-vals = [20000, 15000, 40000]
-labels = ['x', '0', 'None']
+plt.scatter(x,y)
+plt.text(1,1, 'ttt')
 
-plt.pie(vals, labels=labels,  autopct='%1.1f%%')
-plt.title('проценты побед в крестиках и ноликах')
 plt.show()
