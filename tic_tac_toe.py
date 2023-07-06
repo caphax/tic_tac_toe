@@ -1,4 +1,20 @@
-#cpahax49ry2t7r892  trt
+# if search_for_a_visitor(place):
+#     for i in range(len(place)):
+#         print(place[i], end=' ')
+#         if (i + 1) % 3 == 0:
+#             print()
+#     print('\n________________\n')
+
+class Node:
+
+    def __init__(self):
+        self.neighbors = []
+        self.data = [None for i in range(9)]
+
+
+
+
+
 def search_for_a_visitor(plase):
     temp_plase = []
     temp_chet = 0
@@ -51,28 +67,30 @@ def search_for_a_visitor(plase):
 
     return False
 
-def finding_x_0(place, number_of_values, i = None, cross_turn = False,):
+def finding_x_0(origen, number_of_values, i = None, cross_turn = False,):
+#    place.data
+
+
     if i != None:
-        place[i] = '0'
+        origen.data[i] = '0'
         if cross_turn:
-            place[i] = 'x'
+            origen.data[i] = 'x'
 
 
 
         if len(number_of_values) == 0:
-            if search_for_a_visitor(place):
-                for i in range(len(place)):
-                    print(place[i], end=' ')
-                    if (i + 1) % 3 == 0:
-                        print()
-                print('\n________________\n')
+            for i in range(len(origen.data)):
+                print(origen.data[i], end=' ')
+                if (i + 1) % 3 == 0:
+                    print()
+            print('\n________________\n')
             return None
 
 
     for i in number_of_values:
         temp = number_of_values.copy()
         temp.remove(i)
-        finding_x_0(place.copy(), temp, i, not cross_turn)
+        finding_x_0(origen, temp, i, not cross_turn)
 
 
 
@@ -83,8 +101,9 @@ def finding_x_0(place, number_of_values, i = None, cross_turn = False,):
 
 
 
-
+origen = Node()
 place = [None, None, None, None, None, None, None, None, None]
 posible_turns = [0, 1, 2, 3, 4, 5, 6, 7, 8]
 
-finding_x_0(place, posible_turns)
+
+finding_x_0(origen, posible_turns)
