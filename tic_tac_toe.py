@@ -1,6 +1,6 @@
 # if search_for_a_visitor(place):
-#     for i in range(len(place)):
-#         print(place[i], end=' ')
+#     for i in range(len(origen.data)):
+#         print(origen.data[i], end=' ')
 #         if (i + 1) % 3 == 0:
 #             print()
 #     print('\n________________\n')
@@ -11,11 +11,28 @@ class Node:
         self.neighbors = []
         self.data = [None for i in range(9)]
 
+    def new_Node(self, new_data):
+        self.class_ = Node()
+        self.class_.data = new_data
+        self.neighbors.append(self.class_)
+        return self.class_
+
+def Supeeeeeer_Print(origen):
+    for i in range(len(origen.data)):
+        print(origen.data[i], end=' ')
+        if (i + 1) % 3 == 0:
+            print()
+    print('\n________________\n')
+
+    if len(origen.neighbors) == 0:
+        return None
+
+    for i in origen.neighbors:
+        Supeeeeeer_Print(i)
 
 
 
-
-def search_for_a_visitor(plase):
+def victory(plase):
     temp_plase = []
     temp_chet = 0
     for i in range(len(plase)):
@@ -68,8 +85,6 @@ def search_for_a_visitor(plase):
     return False
 
 def finding_x_0(origen, number_of_values, i = None, cross_turn = False,):
-#    place.data
-
 
     if i != None:
         origen.data[i] = '0'
@@ -77,26 +92,17 @@ def finding_x_0(origen, number_of_values, i = None, cross_turn = False,):
             origen.data[i] = 'x'
 
 
-
         if len(number_of_values) == 0:
-            for i in range(len(origen.data)):
-                print(origen.data[i], end=' ')
-                if (i + 1) % 3 == 0:
-                    print()
-            print('\n________________\n')
             return None
 
 
     for i in number_of_values:
         temp = number_of_values.copy()
         temp.remove(i)
-        finding_x_0(origen, temp, i, not cross_turn)
+        finding_x_0(origen.new_Node(origen.data), temp, i, not cross_turn)
 
 
-
-
-
-    return place
+    return None
 
 
 
@@ -107,3 +113,4 @@ posible_turns = [0, 1, 2, 3, 4, 5, 6, 7, 8]
 
 
 finding_x_0(origen, posible_turns)
+Supeeeeeer_Print(origen)
